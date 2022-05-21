@@ -2,6 +2,12 @@
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/satelllte/nextjs-wasm)
 
+## Prerequisites
+
+- [NodeJS](https://nodejs.org/)
+- [Rust & Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
+
 ## Getting Started
 
 Install dependencies:

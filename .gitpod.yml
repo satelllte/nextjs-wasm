@@ -2,6 +2,7 @@ image: gitpod/workspace-full
 
 tasks:
   - init: |
+      cargo install wasm-pack
       npm run build:wasm
       npm run dev
 vscode:
