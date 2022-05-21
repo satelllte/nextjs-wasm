@@ -4,7 +4,7 @@ import { WASMContext } from "../context/WASM"
 export const WASMExample = () => {
   const ctx = useContext(WASMContext)
 
-  if (!ctx.ready || !ctx.wasm) {
+  if (!ctx.wasm) {
     return <>...</>
   }
 
