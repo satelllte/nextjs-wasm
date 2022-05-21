@@ -1,9 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { createContext } from 'react'
 
-const initial: IWASMContext = {
-  ready: false
-}
+const initial: IWASMContext = {}
 
 export const WASMContext = createContext(initial)
 
@@ -16,7 +14,7 @@ export const WASMContextProvider: React.FC<WASMContextProviderProps> = ({
     (async() => {
       const wasm = await import('wasm')
       await wasm.default()
-      setState({ ready: true, wasm })
+      setState({ wasm })
     })()
   }, [])
 
@@ -28,7 +26,6 @@ export const WASMContextProvider: React.FC<WASMContextProviderProps> = ({
 }
 
 interface IWASMContext {
-  ready: boolean
   wasm?: typeof import('wasm')
 }
 
