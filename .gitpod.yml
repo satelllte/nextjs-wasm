@@ -1,0 +1,11 @@
+image: gitpod/workspace-full
+
+tasks:
+  - init: |
+      npm run build:wasm
+      npm run dev
+vscode:
+  extensions:
+    - matklad.rust-analyzer
+    - bungcip.better-toml
+    - serayuzgur.crates
