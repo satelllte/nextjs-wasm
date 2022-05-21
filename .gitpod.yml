@@ -4,6 +4,7 @@ tasks:
   - init: |
       cargo install wasm-pack
       npm run build:wasm
+      npm install
       npm run dev
 vscode:
   extensions:
