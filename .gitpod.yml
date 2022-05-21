@@ -11,3 +11,4 @@ vscode:
     - matklad.rust-analyzer
     - bungcip.better-toml
     - serayuzgur.crates
+    - EditorConfig.EditorConfig
