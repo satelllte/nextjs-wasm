@@ -12,17 +12,43 @@ export const WASMExample = () => {
 }
 
 const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const rafIdRef = useRef<number | null>(null)
+  const fpsRef = useRef<number>(0)
 
   useEffect(() => {
-    if (!canvasRef.current) return
+    const draw = () => {
+      const start = performance.now()
 
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
+      if (!canvasRef.current) return
+  
+      const canvas = canvasRef.current
+      const ctx = canvas.getContext('2d')
+  
+      if (!ctx) return
+  
+      wasm.draw(ctx, canvas.width, canvas.height)
+  
+      const end = performance.now()
+      fpsRef.current = 1000 / (end - start)
 
-    if (!ctx) return
+      rafIdRef.current = requestAnimationFrame(draw)
+    }
 
-    wasm.draw(ctx, canvas.width, canvas.height)
+    const logFPS = () => {
+      console.info(`Canvas | FPS: ${fpsRef.current.toFixed(3)}`)
+    }
+
+    draw()
+
+    const intervalId = setInterval(logFPS, 500)
+
+    return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
+      clearInterval(intervalId)
+    }
   }, [])
 
   return <canvas ref={canvasRef}/>
