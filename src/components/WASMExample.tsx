@@ -21,9 +21,13 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
       console.error('OffscreenCanvas is not available in the browser!')
     }
 
+    // TODO: add certain type for the messages exchanging between JS main & worker threads
     console.info('loading worker ...')
     const worker = new Worker(new URL('../../workers/wasmWorker', import.meta.url))
     console.info('worker: ', worker)
+    worker.onerror = (error) => console.error(error)
+    worker.onmessageerror = (messageEvent) => console.warn(messageEvent)
+    worker.onmessage = (messageEvent) => console.info(messageEvent)
     worker.postMessage({ // TO FIX: worker isn't loaded at this point yet
       a: 1,
       b: 2,
