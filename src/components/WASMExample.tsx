@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { WASMContext } from "../context/WASM"
 import type { WASM } from "../types"
 import type { MessageAdd, WASMWorker } from "../workers/wasm/types"
