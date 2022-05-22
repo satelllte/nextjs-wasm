@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from "react"
 import { WASMContext } from "../context/WASM"
+import { OffscreenCanvasFeature } from "../utils/feature-detection"
 
 export const WASMExample = () => {
   const ctx = useContext(WASMContext)
@@ -16,6 +17,20 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
   const rafIdRef = useRef<number | null>(null)
 
   useEffect(() => {
+    if (!OffscreenCanvasFeature.available()) {
+      console.error('OffscreenCanvas is not available in the browser!')
+    }
+
+    console.info('loading worker ...')
+    const worker = new Worker(new URL('../../workers/wasmWorker', import.meta.url))
+    console.info('worker: ', worker)
+    worker.postMessage({ // TO FIX: worker isn't loaded at this point yet
+      a: 1,
+      b: 2,
+    })
+  }, [])
+
+  useEffect(() => {
     const draw = () => {
       if (!canvasRef.current) return
   
@@ -26,7 +41,8 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
   
       wasm.draw(ctx, canvas.width, canvas.height)
 
-      rafIdRef.current = requestAnimationFrame(draw)
+      // infinite loop temporary disabled
+      // rafIdRef.current = requestAnimationFrame(draw)
     }
 
     draw()
