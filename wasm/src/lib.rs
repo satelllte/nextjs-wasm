@@ -3,6 +3,7 @@ use wasm_bindgen::prelude::JsValue;
 use wasm_bindgen::Clamped;
 use web_sys::CanvasRenderingContext2d;
 use web_sys::ImageData;
+use rand::random;
 
 #[wasm_bindgen]
 pub fn draw(
@@ -14,9 +15,9 @@ pub fn draw(
 
     for _x in 0..width {
         for _y in 0..height {
-            data.push(50);
-            data.push(120);
-            data.push(155);
+            data.push(0);
+            data.push(random());
+            data.push(random());
             data.push(255);
         }
     }

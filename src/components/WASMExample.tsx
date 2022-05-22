@@ -41,7 +41,7 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
 
     draw()
 
-    const intervalId = setInterval(logFPS, 500)
+    const intervalId = setInterval(logFPS, 1000)
 
     return () => {
       if (rafIdRef.current) {
@@ -49,9 +49,9 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
       }
       clearInterval(intervalId)
     }
-  }, [])
+  }, [wasm])
 
-  return <canvas ref={canvasRef}/>
+  return <canvas width={500} height={200} ref={canvasRef}/>
 }
 
 interface CanvasProps {
