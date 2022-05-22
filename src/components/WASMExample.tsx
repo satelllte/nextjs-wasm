@@ -1,5 +1,8 @@
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { WASMContext } from "../context/WASM"
+import type { WASM } from "../types"
+import type { MessageAdd, WASMWorker } from "../workers/wasm/types"
+import { MessageType } from "../workers/wasm/types"
 import { OffscreenCanvasFeature } from "../utils/feature-detection"
 
 export const WASMExample = () => {
@@ -21,17 +24,21 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
       console.error('OffscreenCanvas is not available in the browser!')
     }
 
-    // TODO: add certain type for the messages exchanging between JS main & worker threads
-    console.info('loading worker ...')
-    const worker = new Worker(new URL('../workers/wasmWorker', import.meta.url))
-    console.info('worker: ', worker)
-    worker.onerror = (error) => console.error(error)
-    worker.onmessageerror = (messageEvent) => console.warn(messageEvent)
-    worker.onmessage = (messageEvent) => console.info(messageEvent)
-    worker.postMessage({ // TO FIX: worker isn't loaded at this point yet
-      a: 1,
-      b: 2,
-    })
+    const worker = new Worker(new URL('../workers/wasm/worker', import.meta.url)) as WASMWorker
+    worker.onmessage = (event) => {
+      switch (event.data.type) {
+        case MessageType.ready:
+          worker.postMessage({
+            type: MessageType.add,
+            props: { a: 4, b: 8 },
+          } as MessageAdd)
+          break
+        case MessageType.addResult:
+          const { result } = event.data
+          console.info('result from worker + wasm: ', result)
+          break
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -62,5 +69,5 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
 }
 
 interface CanvasProps {
-  wasm: typeof import('wasm')
+  wasm: WASM
 }

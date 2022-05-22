@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react'
 import { createContext } from 'react'
+import type { WASM } from '../types'
 
 const initial: IWASMContext = {}
 
@@ -26,7 +27,7 @@ export const WASMContextProvider: React.FC<WASMContextProviderProps> = ({
 }
 
 interface IWASMContext {
-  wasm?: typeof import('wasm')
+  wasm?: WASM
 }
 
 interface WASMContextProviderProps {
