@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  app:
+    ports:
+      - 3000:3000
+    build:
+      context: .
+      dockerfile: devcontainer.Dockerfile
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      # use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      - /var/run/docker.sock:/var/run/docker.sock
