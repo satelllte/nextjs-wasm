@@ -8,7 +8,7 @@ tasks:
       npm run dev
 vscode:
   extensions:
-    - matklad.rust-analyzer
+    - rust-lang.rust-analyzer
     - bungcip.better-toml
     - serayuzgur.crates
     - EditorConfig.EditorConfig
