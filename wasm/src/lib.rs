@@ -22,13 +22,13 @@ pub fn draw(
         }
     }
 
-    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), width, height)?;
-    return ctx.put_image_data(&data, 0.0, 0.0);
+    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&data), width, height)?;
+    ctx.put_image_data(&data, 0.0, 0.0)
 }
 
 #[wasm_bindgen]
 pub fn add(x: i32, y: i32) -> i32 {
-    return x + y;
+    x + y
 }
 
 #[cfg(test)]
