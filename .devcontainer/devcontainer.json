@@ -8,7 +8,10 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"dbaeumer.vscode-eslint"
+		"matklad.rust-analyzer",
+    "bungcip.better-toml",
+    "serayuzgur.crates",
+    "EditorConfig.EditorConfig"
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
