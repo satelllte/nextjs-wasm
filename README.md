@@ -1,5 +1,7 @@
 # Next.js with WebAssembly
 
+[Next.js](https://nextjs.org/)-based web application template with [WebAssembly](https://webassembly.org/) module written in [Rust](https://www.rust-lang.org/) programming language.
+
 ## Try in [Gitpod](https://www.gitpod.io/)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/satelllte/nextjs-wasm)
