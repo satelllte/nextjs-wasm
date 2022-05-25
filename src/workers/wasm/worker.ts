@@ -13,6 +13,19 @@ import { MessageType, MessageAddResult, WASMWorker, MessageReady } from './types
         const result = wasm.add(a, b)
         ctx.postMessage({ type: MessageType.addResult, result } as MessageAddResult)
         break
+      case MessageType.canvas:
+        const { canvas } = event.data
+        const ctx2d = canvas.getContext('2d')
+
+        if (!ctx2d) {
+          throw new Error('Couldn\'t get OffscreenCanvas\' 2D context')
+        }
+
+        wasm.draw(ctx2d, canvas.width, canvas.height)
+        // ctx2d.
+        // const result = wasm.add(a, b)
+        // ctx.postMessage({ type: MessageType.addResult, result } as MessageAddResult)
+        break
     }
   }
 
