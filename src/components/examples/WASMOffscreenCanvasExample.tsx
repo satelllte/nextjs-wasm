@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { WASMWorkerContext } from "../../context/WASMWorker"
 import { WASMWorker } from "../../workers/wasm/types"
 
@@ -22,6 +22,14 @@ export const WASMOffscreenCanvasExample = () => {
 
 const Canvas: React.FC<CanvasProps> = ({ worker }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+
+  useEffect(() => {
+    console.info('canvasRef.current: ', canvasRef.current)
+    const canvas = canvasRef.current
+    // @ts-ignore
+    const offscreen: OffscreenCanvas = canvas.transferControlToOffscreen() as OffscreenCanvas
+    console.info('offscreen: ', offscreen)
+  }, [])
 
   return <canvas width={600} height={400} ref={canvasRef}/>
 }
