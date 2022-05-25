@@ -32,7 +32,7 @@ const Canvas: React.FC<CanvasProps> = ({ wasm }) => {
     let frame = 0
 
     const draw = () => {
-      wasm.draw(ctx2d, canvas.width, canvas.height)
+      wasm.draw_random_pixels(ctx2d, canvas.width, canvas.height)
 
       frame++
       time = performance.now()

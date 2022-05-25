@@ -21,14 +21,14 @@ import { MessageType, MessageAddResult, WASMWorker, MessageReady, MessageFinish 
           throw new Error('Couldn\'t get OffscreenCanvas 2D context')
         }
 
-        const duration = 10000;
+        const duration = 10000
         const start = performance.now()
         const end = start + duration
         let time = start
         let frame = 0
 
         const draw = () => {
-          wasm.draw(ctx2d, canvas.width, canvas.height)
+          wasm.draw_random_pixels(ctx2d, canvas.width, canvas.height)
           
           frame++
           time = performance.now()

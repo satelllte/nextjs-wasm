@@ -21,8 +21,8 @@ const Home: NextPage = () => {
 
         <div className={styles.example}>
           {/* <WASMOffscreenCanvasExample/> */}
-          {/* <WASMCanvasExample/> */}
-          <NativeCanvasExample/>
+          <WASMCanvasExample/>
+          {/* <NativeCanvasExample/> */}
         </div>
       </main>
     </div>
