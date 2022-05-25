@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { WASMOffscreenCanvasExample } from '../components/examples/WASMOffscreenCanvasExample'
 import { WASMCanvasExample } from '../components/examples/WASMCanvasExample'
+import { NativeCanvasExample } from '../components/examples/NativeCanvasExample'
 
 const Home: NextPage = () => {
   return (
@@ -20,7 +21,8 @@ const Home: NextPage = () => {
 
         <div className={styles.example}>
           {/* <WASMOffscreenCanvasExample/> */}
-          <WASMCanvasExample/>
+          {/* <WASMCanvasExample/> */}
+          <NativeCanvasExample/>
         </div>
       </main>
     </div>
