@@ -3,6 +3,7 @@ import type { OffscreenCanvas } from '../../types'
 export enum MessageType {
   ready,
   canvas,
+  finish,
   add,
   addResult,
 }
@@ -14,6 +15,11 @@ export type MessageReady = {
 export type MessageCanvas = {
   type: MessageType.canvas
   canvas: OffscreenCanvas
+}
+
+export type MessageFinish = {
+  type: MessageType.finish
+  frames: number
 }
 
 export type MessageAdd = {
@@ -32,6 +38,7 @@ export type MessageAddResult = {
 export type Message =
   | MessageReady
   | MessageCanvas
+  | MessageFinish
   | MessageAdd
   | MessageAddResult
 

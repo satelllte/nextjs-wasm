@@ -1,4 +1,4 @@
-import { MessageType, MessageAddResult, WASMWorker, MessageReady } from './types'
+import { MessageType, MessageAddResult, WASMWorker, MessageReady, MessageFinish } from './types'
 
 (async() => {
   const wasm = await import('wasm')
@@ -18,13 +18,30 @@ import { MessageType, MessageAddResult, WASMWorker, MessageReady } from './types
         const ctx2d = canvas.getContext('2d')
 
         if (!ctx2d) {
-          throw new Error('Couldn\'t get OffscreenCanvas\' 2D context')
+          throw new Error('Couldn\'t get OffscreenCanvas 2D context')
         }
 
-        wasm.draw(ctx2d, canvas.width, canvas.height)
-        // ctx2d.
-        // const result = wasm.add(a, b)
-        // ctx.postMessage({ type: MessageType.addResult, result } as MessageAddResult)
+        const duration = 10000;
+        const start = performance.now()
+        const end = start + duration
+        let time = start
+        let frame = 0
+
+        const draw = () => {
+          wasm.draw(ctx2d, canvas.width, canvas.height)
+          
+          frame++
+          time = performance.now()
+
+          if (time < end) {
+            requestAnimationFrame(draw)
+          } else {
+            ctx.postMessage({ type: MessageType.finish, frames: frame } as MessageFinish)
+          }
+        }
+
+        requestAnimationFrame(draw)
+
         break
     }
   }

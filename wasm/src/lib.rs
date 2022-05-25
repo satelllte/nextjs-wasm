@@ -18,7 +18,7 @@ pub fn draw(
             data.push(0);
             data.push(random());
             data.push(random());
-            data.push(255);
+            data.push(random());
         }
     }
 
