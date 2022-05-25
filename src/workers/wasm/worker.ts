@@ -1,6 +1,5 @@
 import { MessageType, MessageAddResult, WASMWorker, MessageReady } from './types'
 
-// TODO: enable top-level avait
 (async() => {
   const wasm = await import('wasm')
   await wasm.default()
