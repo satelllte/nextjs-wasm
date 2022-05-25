@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { WASMOffscreenCanvasExample } from '../components/examples/WASMOffscreenCanvasExample'
+import { WASMCanvasExample } from '../components/examples/WASMCanvasExample'
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +19,8 @@ const Home: NextPage = () => {
         </h1>
 
         <div className={styles.example}>
-          <WASMOffscreenCanvasExample/>
+          {/* <WASMOffscreenCanvasExample/> */}
+          <WASMCanvasExample/>
         </div>
       </main>
     </div>
