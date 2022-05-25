@@ -42,10 +42,8 @@ pub fn draw_random_pixels(
                 data[i+2] = random();
                 data[i+3] = 255;
             }
-            match ctx2d.put_image_data(&imagedata, 0.0, 0.0) {
-                Ok(()) => Ok(()),
-                Err(e) => Err(e)
-            }
+            let imagedata = ImageData::new_with_u8_clamped_array_and_sh(Clamped(data), width, height)?;
+            ctx2d.put_image_data(&imagedata, 0.0, 0.0)
         },
         Err(e) => Err(e)
     }
