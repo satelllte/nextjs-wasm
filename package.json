@@ -1,6 +1,6 @@
 {
   "name": "nextjs-wasm",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "dev": "next dev",
     "build:wasm": "cd wasm && ./rs-build.sh",
