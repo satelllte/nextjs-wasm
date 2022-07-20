@@ -13,7 +13,7 @@
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/) | recommended version: `>= 16`
-- [Rust & Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) | recommended versions: `>= 1.61`
+- [Rust & Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) | recommended version: `>= 1.61`
 
 ## Getting Started
 
