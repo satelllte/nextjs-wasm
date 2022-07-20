@@ -6,18 +6,15 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    target-branch: "dependabot-updates"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "cargo"
     directory: "/wasm/"
-    target-branch: "dependabot-updates"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "github-actions"
     directory: "/" # default location of `.github/workflows`
-    target-branch: "dependabot-updates"
     schedule:
       interval: "weekly"
