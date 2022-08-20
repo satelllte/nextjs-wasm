@@ -1,5 +1,7 @@
 # Next.js with WebAssembly
 
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
+
 [Next.js](https://nextjs.org/)-based web application template with [WebAssembly](https://webassembly.org/) module written in [Rust](https://www.rust-lang.org/) programming language.
 
 ## Try in [Gitpod](https://www.gitpod.io/)
