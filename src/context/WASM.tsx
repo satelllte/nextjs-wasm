@@ -1,17 +1,5 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { createContext } from 'react'
-
-// initialize at module scope, to prevent executing twice on strict mode,
-// which can cause issues when calling async functions on wasm
-const wasmPromise = import('wasm').then(wasm => {
-  if (typeof window !== "undefined") { 
-      // client side: initialize
-      return wasm.default().then(() => wasm)
-  } else { 
-      // server side: do nothing
-      return wasm
-  }
-}) 
 
 const initial: IWASMContext = {}
 
@@ -22,12 +10,16 @@ export const WASMContextProvider: React.FC<WASMContextProviderProps> = ({
 }) => {
   const [state, setState] = useState<IWASMContext>(initial)
 
-  useEffect(() => {
+  // Important: this has to runs only once 
+  // (with `reactStrictMode: true` and dev mode the regular effect with empty dependencies runs twice),
+  // otherwise the app can crash, see https://github.com/rustwasm/wasm-bindgen/issues/3153
+  useEffectOnce(() => {
     (async() => {
-      const wasm = await wasmPromise
-      setState({ wasm })
+      const wasm = await import("wasm");
+      await wasm.default();
+      setState({ wasm });
     })()
-  }, [])
+  })
 
   return (
     <WASMContext.Provider value={state}>
@@ -42,4 +34,16 @@ interface IWASMContext {
 
 interface WASMContextProviderProps {
   children: ReactNode
+}
+
+const useEffectOnce = (f: () => void) => {
+  const ref = useRef(true);
+  useEffect(() => {
+    if (ref.current) {
+      f();
+    }
+    return () => {
+      ref.current = false;
+    };
+  }, [f]);
 }
