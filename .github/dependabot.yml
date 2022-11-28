@@ -7,14 +7,14 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "cargo"
     directory: "/wasm/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/" # default location of `.github/workflows`
     schedule:
-      interval: "weekly"
+      interval: "monthly"
